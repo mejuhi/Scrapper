@@ -7,6 +7,9 @@ First, make sure that you're using Python 3.
 # Working
 Scrapper was last tested on 27th march 2020, Any changes to the site will hamper its working
 
+# Disclaimer
+This scraper is provided as a public service because Indeed doesn't have an API for reviews. Indeed TOS prohibit scraping and I make no representation that your account won't be banned if you use this program. Furthermore, should I be contacted by Indeed with a request to remove this repo, I will do so immediately.
+
 # Usage
 ```
 usage: main.py [-h] [-url URL] [-outputcsv FILE.CSV] [--pagelimit NUMBER]
