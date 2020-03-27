@@ -1,0 +1,5 @@
+python main.py -u https://www.glassdoor.co.in/Reviews/Capgemini-Invent-Reviews-E589990.htm -f "output-invent.csv" --username 'xorisow726@emailnube.com' --password 'xorisow726@emailnube.com' -l 25 --headless
+
+
+
+python main.py -u "https://www.glassdoor.co.in/Reviews/Accenture-Reviews-E4138.htm" -f "output-accenture.csv" --username 'xorisow726@emailnube.com' --password 'xorisow726@emailnube.com' -l 25 --headless
