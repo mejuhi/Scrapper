@@ -1,1 +1,5 @@
 python me1.py
+
+python main.py --pagelimit 5 --single 0 --url https://www.payscale.com/research/US/Employer=Capgemini/Reviews --outputcsv whatJuhi.csv
+
+python main.py --pagelimit 5 --single 0 --url https://www.payscale.com/research/US/Employer=Capgemini/Reviews --outputcsv whatJuhi.csv
