@@ -93,39 +93,51 @@ def processcsv():
     my_CSV_File= pd.read_csv("step1.csv",names=col_Names)
     print(my_CSV_File)
     my_CSV_File.to_csv("step2.csv", mode='w', header=True)	
-    data = pd.read_csv("step2.csv")
-    EmpData = data["OtherRandom"]
+    datadf = pd.read_csv("step2.csv")
+
+    ReviewerData = datadf["Reviewer"]
+    ProData = datadf["ReviewPro"]
+    ConData = datadf["ReviewCon"]
+    Pro_list=[]
+    Con_list=[]
     Role_list=[]
-    Date_list=[]
     loc_list =[]
-    Status_list =[]
-    for emp in EmpData:
-        me = emp.split("(")
-        Role_list.append(me[0])
-        date = emp.split('-')[-1]
-        Date_list.append(date)
-        loc = emp.split('-')[-2]
-        loc_list.append(loc)
-        if "Current Employee" in emp:
-            Status_list.append("Current Employee")
-        elif "Former Employee" in emp:
-            Status_list.append("Former Employee")
+
+    for pro in ProData:
+        onlyPro = pro.split(':')[-1]
+        Pro_list.append(onlyPro)
+    
+    for con in ConData:
+        onlyCon = con.split(':')[-1]
+        Con_list.append(onlyCon)
+
+    for data in ReviewerData:
+        if " in " in data:
+            me = data.replace(" in ", " | ")
+            loc = me.split('|')[-1]
+            loc = loc.replace(":", " ")
+            loc_list.append(loc.strip())
+            role = me.split('|')[0]
+            role = role.replace(":", " ")
+            Role_list.append(role.strip())
         else:
-            Status_list.append("NA")
-    data['Role'] = Role_list
-    data['Date'] = Date_list
-    data['location'] = loc_list
-    data['EmployeeStatus'] = Status_list
-    final_data = data.copy(deep=True)
-    final_data.drop(["OtherRandom", "Unnamed: 0"], axis = 1, inplace = True) 
+            loc_list.append("NA")
+            data = data.replace(":", " ")
+            Role_list.append(data.strip())
+
+    datadf['Role'] = Role_list
+    datadf['location'] = loc_list
+    datadf['Pro'] = Pro_list
+    datadf['Con'] = Con_list
+
+    final_data = datadf.copy(deep=True)
+    final_data.drop(["ReviewPro", "ReviewCon", "Reviewer", "Unnamed: 0"], axis = 1, inplace = True) 
     final_data.to_csv(args.outputcsv, mode='w', header=True)
-
-
 
 def main():
     logger.info(f'Scraping up to {args.pagelimit} review pages.')
     scrapereview()
-    #processcsv()
+    processcsv()
     end = time.time()
     logger.info("Successfully completed the task")
 
