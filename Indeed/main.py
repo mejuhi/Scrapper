@@ -2,7 +2,10 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup 
 import argparse
+import logging
 import time
+import logging.config
+
 # required arg
 DEFAULT_URL = 'https://www.indeed.co.in/cmp/Capgemini/reviews'
 DEFAULT_CSV = 'helloJuhi.csv'
@@ -18,8 +21,17 @@ args = parser.parse_args()
 # print(args.pagelimit)
 # print(args.single)
 
-  
-def news(): 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+logger.addHandler(ch)
+formatter = logging.Formatter(
+    '%(asctime)s %(levelname)s %(lineno)d\
+    :%(filename)s(%(process)d) - %(message)s')
+ch.setFormatter(formatter)
+
+def scrapereview(): 
     # the target we want to open
     conUrl = args.url + "?start="	
     c = -20
@@ -63,7 +75,7 @@ def news():
             print("Error")
     print("End of code, Goodbye!")			
 
-def what():
+def processcsv():
     col_Names=['ReviewText','ReviewTitle','ReviewRating','OtherRandom']
     my_CSV_File= pd.read_csv("step1.csv",names=col_Names)
     print(my_CSV_File)
@@ -95,5 +107,14 @@ def what():
     final_data.drop(["OtherRandom", "Unnamed: 0"], axis = 1, inplace = True) 
     final_data.to_csv(args.outputcsv, mode='w', header=True)
 
-news()
-what()
+
+
+def main():
+    logger.info(f'Scraping up to {args.pagelimit} review pages.')
+    scrapereview()
+    processcsv()
+    end = time.time()
+    logger.info("Successfully completed the task")
+
+if __name__ == '__main__':
+    main()

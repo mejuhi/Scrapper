@@ -25,5 +25,5 @@ optional arguments:
 ### Example 1
 Suppose you want to get the reviews from first 3 page of Capgemini from indeed
 
-`python app.py --pagelimit 3 --single 0 --url https://www.indeed.co.in/cmp/Capgemini/reviews --outputcsv whatJuhi.csv`
+`python main.py --pagelimit 3 --single 0 --url https://www.indeed.co.in/cmp/Capgemini/reviews --outputcsv whatJuhi.csv`
 
