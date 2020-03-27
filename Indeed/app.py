@@ -26,7 +26,7 @@ def news():
     for i in range(0,(int(args.pagelimit))):
         c = c + 20 
         otherUrl =  conUrl + str(c)
-        
+        sleep 10
         #open with GET method 
         resp=requests.get(otherUrl) 
           
