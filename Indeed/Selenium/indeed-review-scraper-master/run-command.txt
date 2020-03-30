@@ -1,0 +1,7 @@
+python main.py --headless --url "https://au.indeed.com/cmp/Commonwealth-Bank/reviews" --limit 1000 -f commonwealthbank_reviews.csv
+
+
+python main.py --headless --url "https://www.indeed.co.in/cmp/Capgemini/reviews" --limit 25 -f commonwealthbank_reviews.csv 
+
+
+mansi joglekar
